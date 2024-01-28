@@ -1,25 +1,38 @@
 package com.project.headbridgeproject.poshStore.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 @Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "cart_of_orders")
 public class CartOfOrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer id;
+    private Long id;
 
+    @ManyToMany
+    @JoinTable(name = "cart_of_order_goods",
+            joinColumns = @JoinColumn(name = "cart_of_order_id"),
+            inverseJoinColumns = @JoinColumn(name = "goods_id"))
+    public List<ProductGoodsEntity> goodsId;
 
-    public List<ProductGoods> goodsId;
-    public List<Orders> ordersId;
-    public Integer Quantity;
+    @OneToMany(mappedBy = "cartOfOrderEntity")
+    public List<OrderEntity> ordersId;
 
-    public List<DeliveryAddressEntity> address;
+    @Column(name = "quantity", nullable = false)
+    private Integer quantity;
 
-    public List<Users> userId;
+    @OneToOne
+    @JoinColumn(name = "delivery_address_id")
+    public DeliveryAddressEntity address;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    public UserEntity userId;
 }

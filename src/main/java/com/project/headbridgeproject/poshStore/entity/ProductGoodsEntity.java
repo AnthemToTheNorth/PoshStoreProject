@@ -5,35 +5,36 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table
+@Table(name = "product_goods")
 public class ProductGoodsEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
 
     @Column(name = "name", nullable = false)
-    public String name;
+    private String name;
     @Column(name = "description", nullable = false)
-    public String description;
+    private String description;
     @Column(name = "price", nullable = false)
-    public Integer price;
+    private Integer price;
     @Column(name = "size", nullable = false)
-    public String size;
+    private String size;
 
     @ManyToOne
     @JoinColumn(name = "brand_id")
-    public ProductBrandEntity brand;
+    private ProductBrandEntity brand;
 
     @ManyToOne
     @JoinColumn(name = "classification_id")
-    public ProductClassificationEntity classification;
+    private ProductClassificationEntity classification;
 
-    //public List<ProductBrandEntity> brandId;
-    /*много товаров - одна классификация
-    public List<ProductClassificationEntity> classificationId;*/
+    @ManyToMany(mappedBy = "goodsId")
+    public List<CartOfOrderEntity> cartOfOrderEntities;
 }

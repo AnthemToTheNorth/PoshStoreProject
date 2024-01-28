@@ -11,15 +11,15 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table
+@Table(name = "user_roles")
 public class UserRoleEntity {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
 
     @Column(name = "name", nullable = false)
-    public String name;
+    private String name;
 
     @ManyToMany(mappedBy = "roles")
-    public List<UserEntity> users;
+    private List<UserEntity> users;
 }

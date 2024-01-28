@@ -11,18 +11,34 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table
+@Table(name = "delivery_addresses")
 public class DeliveryAddressEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
 
     @Column(name = "description", nullable = false)
-    public String description;
+    private String description;
     @Column(name = "postcode", nullable = false)
-    public String postcode;
+    private String postcode;
 
-    public List<DeliveryRegions> regionId;
-    public List<DeliveryCountries> countryId;
-    public List<DeliveryCities> cityId;
+    @ManyToMany(mappedBy = "deliveryAddresses")
+    private List<OrderEntity> orders;
+
+    @ManyToMany
+    @JoinTable(name = "delivery_address_regions",
+            joinColumns = @JoinColumn(name = "delivery_address_id"),
+            inverseJoinColumns = @JoinColumn(name = "region_id"))
+    public List<DeliveryRegionEntity> regionId;
+
+    @ManyToOne
+    @JoinColumn(name = "country_id")
+    public DeliveryCountryEntity countryId;
+
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    public DeliveryCityEntity cityId;
+
+    @OneToOne(mappedBy = "address")
+    public CartOfOrderEntity cartOfOrderEntity;
 }

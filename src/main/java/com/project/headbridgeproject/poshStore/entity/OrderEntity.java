@@ -10,33 +10,29 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table
+@Table(name = "orders")
 public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
 
     @Column(name = "comments", nullable = false)
-    public String comments;
+    private String comments;
 
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    public UserEntity user;
-    //public List<Users> userId;
+    private UserEntity user;
 
-    public List<DeliveryAddresses> deliveryId;
+    @ManyToMany
+    @JoinTable(
+            name = "order_delivery",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "delivery_id")
+    )
+    private List<DeliveryAddressEntity> deliveryAddresses;
 
-
-
-
-    //одна корзина - много заказов
-    //много пользователей - много заказов
-    // много заказов - много адресов доставки
-
-    //public List<Users> userId;
-
-
-
-
+    @ManyToOne
+    @JoinColumn(name = "cart_of_order_id")
+    private CartOfOrderEntity cartOfOrderEntity;
 }

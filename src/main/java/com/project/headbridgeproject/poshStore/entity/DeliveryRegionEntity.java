@@ -5,16 +5,21 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table
+@Table(name = "delivery_regions")
 public class DeliveryRegionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
 
     @Column(name = "name", nullable = false)
-    public String name;
+    private String name;
+
+    @ManyToMany(mappedBy = "regionId")
+    public List<DeliveryAddressEntity> deliveryAddresses;
 }

@@ -10,23 +10,23 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table
+@Table(name = "users")
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
 
 
     @Column(name = "firstName", nullable = false)
-    public String firstName ;
+    private String firstName ;
     @Column(name = "lastName", nullable = false)
-    public String lastName ;
+    private String lastName ;
     @Column(name = "email", nullable = false)
-    public String email ;
+    private String email ;
     @Column(name = "phoneNumber", nullable = false)
-    public String phoneNumber ;
+    private String phoneNumber ;
     @Column(name = "password", nullable = false)
-    public String password ;
+    private String password ;
 
     /*@Column(name = "createdWhen", nullable = false)
     private LocalDate createdWhen;
@@ -35,7 +35,6 @@ public class UserEntity {
     + updateWhen
     + updateBy
     */
-
 
     @ManyToMany
     @JoinTable(
@@ -48,18 +47,12 @@ public class UserEntity {
     @OneToMany(mappedBy = "user")
     public List<UsersReviewEntity> reviews;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order_id")
     public List<OrderEntity> order;
 
+    @OneToOne(mappedBy = "userId")
+    public CartOfOrderEntity cartOfOrderEntity;
 
-    //one2many?
-    /*@ManyToMany
-    @JoinTable(
-            name = "users_reviews_goods",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "review_id")
-    )
-    public List<UsersReviewEntity> reviews;*/
 }
 
 

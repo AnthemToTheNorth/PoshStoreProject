@@ -9,25 +9,21 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table
+@Table(name = "users_reviews")
 public class UsersReviewEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
 
     @Column(name = "description", nullable = false)
-    public String description;
+    private String description;
 
-    @OneToOne //???
+    @OneToOne
     @JoinColumn(name = "goods_id")
-    public ProductGoodsEntity goods;
-// один обзор на один товар
+    private ProductGoodsEntity goods;
 
-    //many2one
     @ManyToOne
     @JoinColumn(name = "user_id")
-    public UserEntity user;
+    private UserEntity user;
 
-    //public List<UserEntity> users;
-    // много пользователей, много обзоров ??
 }

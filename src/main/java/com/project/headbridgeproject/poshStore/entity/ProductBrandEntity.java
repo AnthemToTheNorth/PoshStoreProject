@@ -11,17 +11,17 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table
+@Table (name = "product_brands")
 public class ProductBrandEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
 
     @Column(name = "name", nullable = false)
-    public String name;
+    private String name;
     @Column(name = "description", nullable = false)
-    public String description;
+    private String description;
 
     @OneToMany(mappedBy = "brand")
-    public List<ProductGoodsEntity> goods;
+    private List<ProductGoodsEntity> goods;
 }
