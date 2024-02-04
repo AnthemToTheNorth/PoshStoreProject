@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -22,8 +24,15 @@ public class UsersReviewEntity {
     @JoinColumn(name = "goods_id")
     private ProductGoodsEntity goods;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private UserEntity user;
+    /*@ManyToOne
+    @JoinColumn(name = "users_id")
+    private UserEntity users;*/
 
+    @ManyToMany
+    @JoinTable(
+            name = "users_reviews_users",
+            joinColumns = @JoinColumn(name = "users_review_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<UserEntity> users;
 }

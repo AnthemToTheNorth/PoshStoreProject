@@ -16,7 +16,6 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @Column(name = "firstName", nullable = false)
     private String firstName ;
     @Column(name = "lastName", nullable = false)
@@ -42,16 +41,24 @@ public class UserEntity {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    public List<UserRoleEntity> roleId;
+    public List<UserRoleEntity> roles;
 
-    @OneToMany(mappedBy = "user")
-    public List<UsersReviewEntity> reviews;
+    /*@OneToMany(mappedBy = "reviews_id")
+    public List<UsersReviewEntity> reviews;*/
 
-    @OneToMany(mappedBy = "order_id")
+    @OneToMany(mappedBy = "id")
     public List<OrderEntity> order;
 
     @OneToOne(mappedBy = "userId")
     public CartOfOrderEntity cartOfOrderEntity;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    public List<UserRoleEntity> userRoles;
 
 }
 
