@@ -11,8 +11,8 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "product_classification")
-public class ProductClassificationEntity {
+@Table(name = "product_goods")
+public class GoodsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,7 +21,15 @@ public class ProductClassificationEntity {
     private String name;
     @Column(name = "description", nullable = false)
     private String description;
+    @Column(name = "price", nullable = false)
+    private Integer price;
+    @Column(name = "size", nullable = false)
+    private String size;
+    @Column
+    private String brand;
+    @Column
+    private String classification;
 
-    @OneToMany(mappedBy = "classification")
-    private List<ProductGoodsEntity> goods;
+    @ManyToMany(mappedBy = "goodsId")
+    public List<CartOfOrderEntity> cartOfOrderEntities;
 }

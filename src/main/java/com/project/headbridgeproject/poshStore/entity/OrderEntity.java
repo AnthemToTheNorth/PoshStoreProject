@@ -18,20 +18,12 @@ public class OrderEntity {
 
     @Column(name = "comments", nullable = false)
     private String comments;
-
+    @Column
+    private String deliveryAddresses;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity users;
-
-    @ManyToMany
-    @JoinTable(
-            name = "order_delivery",
-            joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "delivery_id")
-    )
-    private List<DeliveryAddressEntity> deliveryAddresses;
-
     @ManyToOne
     @JoinColumn(name = "cart_of_order_id")
     private CartOfOrderEntity cartOfOrderEntity;

@@ -16,22 +16,16 @@ public class CartOfOrderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    //@Column(name = "quantity", nullable = false)
+    //private Integer quantity;
+
     @ManyToMany
     @JoinTable(name = "cart_of_order_goods",
             joinColumns = @JoinColumn(name = "cart_of_order_id"),
             inverseJoinColumns = @JoinColumn(name = "goods_id"))
-    public List<ProductGoodsEntity> goodsId;
-
+    public List<GoodsEntity> goodsId;
     @OneToMany(mappedBy = "cartOfOrderEntity")
     public List<OrderEntity> ordersId;
-
-    @Column(name = "quantity", nullable = false)
-    private Integer quantity;
-
-    @OneToOne
-    @JoinColumn(name = "delivery_address_id")
-    public DeliveryAddressEntity address;
-
     @OneToOne
     @JoinColumn(name = "user_id")
     public UserEntity userId;

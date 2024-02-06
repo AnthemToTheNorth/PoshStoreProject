@@ -27,14 +27,6 @@ public class UserEntity {
     @Column(name = "password", nullable = false)
     private String password ;
 
-    /*@Column(name = "createdWhen", nullable = false)
-    private LocalDate createdWhen;
-    @Column(name = "createdBy", nullable = false)
-    private String createBy;
-    + updateWhen
-    + updateBy
-    */
-
     @ManyToMany
     @JoinTable(
             name = "user_roles",
@@ -42,24 +34,29 @@ public class UserEntity {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     public List<UserRoleEntity> roles;
-
-    /*@OneToMany(mappedBy = "reviews_id")
-    public List<UsersReviewEntity> reviews;*/
-
     @OneToMany(mappedBy = "id")
     public List<OrderEntity> order;
-
     @OneToOne(mappedBy = "userId")
     public CartOfOrderEntity cartOfOrderEntity;
 
-    @ManyToMany
+    /*@ManyToMany
     @JoinTable(
             name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    public List<UserRoleEntity> userRoles;
+    public List<UserRoleEntity> userRoles;*/
 
+    /*@OneToMany(mappedBy = "reviews_id")
+    public List<UsersReviewEntity> reviews;*/
+
+    /*@Column(name = "createdWhen", nullable = false)
+    private LocalDate createdWhen;
+    @Column(name = "createdBy", nullable = false)
+    private String createBy;
+    + updateWhen
+    + updateBy
+    */
 }
 
 
