@@ -16,4 +16,5 @@ import java.util.function.Function;
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
+    UserEntity findUserByLogin(final String login);
 }

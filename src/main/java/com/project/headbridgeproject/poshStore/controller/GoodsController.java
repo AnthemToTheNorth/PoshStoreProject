@@ -25,12 +25,12 @@ public class GoodsController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping
+    @GetMapping("/list")
     public ResponseEntity<List<GoodsEntity>> getAllGoods() {
         return ResponseEntity.ok(goodsService.getAllGoods());
     }
 
-    @PostMapping
+    @PostMapping("/{id}")
     public ResponseEntity<GoodsEntity> createGoods(@RequestBody GoodsEntity newGoods) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(goodsService.create(newGoods));
