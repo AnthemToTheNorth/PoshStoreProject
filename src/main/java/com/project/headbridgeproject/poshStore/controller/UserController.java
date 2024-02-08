@@ -1,5 +1,7 @@
 package com.project.headbridgeproject.poshStore.controller;
 
+import com.project.headbridgeproject.poshStore.dto.UserCreateDto;
+import com.project.headbridgeproject.poshStore.dto.UserDto;
 import com.project.headbridgeproject.poshStore.entity.UserEntity;
 import com.project.headbridgeproject.poshStore.service.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -16,22 +18,22 @@ public class UserController {
     }
 
     @GetMapping
-    public List<UserEntity> getAllUsers() {
+    public List<UserDto> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @GetMapping("/{id}")
-    public UserEntity getOne(@PathVariable Long id) {
+    public UserDto getOne(@PathVariable Long id) {
         return userService.getOne(id);
     }
 
     @PostMapping
-    public UserEntity create(@RequestBody UserEntity newUser) {
+    public UserDto create(@RequestBody UserCreateDto newUser) {
         return userService.create(newUser);
     }
 
     @PutMapping("/{id}")
-    public UserEntity update(@PathVariable Long id, @RequestBody UserEntity updatedUser) {
+    public UserDto update(@PathVariable Long id, @RequestBody UserEntity updatedUser) {
         return userService.update(id, updatedUser);
     }
 

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -21,11 +22,13 @@ public class CartOfOrderEntity {
 
     @ManyToMany
     @JoinTable(name = "cart_of_order_goods",
-            joinColumns = @JoinColumn(name = "cart_of_order_id"),
-            inverseJoinColumns = @JoinColumn(name = "goods_id"))
+        joinColumns = @JoinColumn(name = "cart_of_order_id"),
+        inverseJoinColumns = @JoinColumn(name = "goods_id"))
     public List<GoodsEntity> goodsId;
+
     @OneToMany(mappedBy = "cartOfOrderEntity")
     public List<OrderEntity> ordersId;
+
     @OneToOne
     @JoinColumn(name = "user_id")
     public UserEntity userId;

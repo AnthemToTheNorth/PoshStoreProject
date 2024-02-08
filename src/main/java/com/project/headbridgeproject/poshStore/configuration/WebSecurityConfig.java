@@ -18,30 +18,28 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 public class WebSecurityConfig {
 
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private UserDetailsService userDetailsService;
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
-    }
+//    @Bean
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(userDetailsService);
+//    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
-                .cors(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/goods/get/**", "/goods/list").hasRole("USER")
-                        .requestMatchers("/goods/**").hasRole("ADMIN")
-                        .requestMatchers("/roles/**").hasRole("ADMIN")
-                        .requestMatchers("/users/**").hasRole("ADMIN")
-                        .anyRequest().permitAll())
-                .httpBasic(Customizer.withDefaults())
-                .build();
+            .cors(AbstractHttpConfigurer::disable)
+            .authorizeHttpRequests((requests) -> requests
+                .requestMatchers("/goods/get/**", "/goods/list").hasRole("USER")
+                .requestMatchers("/goods/**").hasRole("ADMIN")
+                .requestMatchers("/roles/**").hasRole("ADMIN")
+                .requestMatchers("/users/**").hasRole("ADMIN")
+                .anyRequest().permitAll())
+            .httpBasic(Customizer.withDefaults())
+            .build();
     }
 
-    
 
 }

@@ -1,15 +1,11 @@
 package com.project.headbridgeproject.poshStore.service.userDetails;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-@Builder
 @RequiredArgsConstructor
 public class CustomuserDetails implements UserDetails {
 
@@ -22,14 +18,14 @@ public class CustomuserDetails implements UserDetails {
     private final Boolean credentialsNotExpired;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public CustomuserDetails(String password, String login, Long id, Boolean enable, Boolean accountNotExpire, Boolean accountNotLocked, Boolean credentialsNotExpired, Collection<? extends GrantedAuthority> authorities) {
+    public CustomuserDetails(Long id, String login, String password, Collection<? extends GrantedAuthority> authorities) {
         this.password = password;
         this.login = login;
         this.id = id;
-        this.enable = enable;
-        this.accountNotExpire = accountNotExpire;
-        this.accountNotLocked = accountNotLocked;
-        this.credentialsNotExpired = credentialsNotExpired;
+        this.enable = true;
+        this.accountNotExpire = true;
+        this.accountNotLocked = true;
+        this.credentialsNotExpired = true;
         this.authorities = authorities;
     }
 
