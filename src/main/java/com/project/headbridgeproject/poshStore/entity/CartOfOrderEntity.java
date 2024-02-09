@@ -25,5 +25,4 @@ public class CartOfOrderEntity {
     @OneToOne
     @JoinColumn(name = "user_id")
     public UserEntity userId;
-
 }
