@@ -45,7 +45,7 @@ public class CartOfOrderService {
     public void addGoodsToCart(Long cartId, Long goodsId) {
         CartOfOrderEntity cart = cartOfOrderRepository.findById(cartId).orElseThrow(() -> new NotFoundException("Cart not found"));
         GoodsEntity goods = goodsRepository.findById(goodsId).orElseThrow(() -> new NotFoundException("Goods not found"));
-        cart.getGoodsId().add(goods);
+        cart.getGoods().add(goods);
         cartOfOrderRepository.save(cart);
     }
 
@@ -53,8 +53,8 @@ public class CartOfOrderService {
     public void removeGoodsFromCart(Long cartId, Long goodsId) {
         CartOfOrderEntity cart = cartOfOrderRepository.findById(cartId).orElseThrow(() -> new NotFoundException("Cart not found"));
         GoodsEntity goods = goodsRepository.findById(goodsId).orElseThrow(() -> new NotFoundException("Goods not found"));
-        if (cart.getGoodsId().contains(goods)) {
-            cart.getGoodsId().remove(goods);
+        if (cart.getGoods().contains(goods)) {
+            cart.getGoods().remove(goods);
             cartOfOrderRepository.save(cart);
         } else {
             throw new NotFoundException("Goods not found in cart");

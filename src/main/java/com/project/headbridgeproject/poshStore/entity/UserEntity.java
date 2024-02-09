@@ -18,26 +18,30 @@ public class UserEntity {
 
     @Column(name = "firstName", nullable = false)
     private String firstName ;
+
     @Column(name = "lastName", nullable = false)
     private String lastName ;
+
     @Column(name = "email", nullable = false)
     private String email ;
+
     @Column(name = "phoneNumber", nullable = false)
     private String phoneNumber ;
+
     @Column(name = "password", nullable = false)
     private String password ;
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    public List<UserRoleEntity> roles;
+    @Column(name = "role", nullable = false)
+    public Role role;
+
     @OneToMany(mappedBy = "id")
     public List<OrderEntity> order;
+
     @OneToOne(mappedBy = "userId")
     public CartOfOrderEntity cartOfOrderEntity;
+
+
+
 
     /*@ManyToMany
     @JoinTable(
