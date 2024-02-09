@@ -12,11 +12,9 @@ public class OpenApiConfig {
     public OpenAPI configOpenApi() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Сервис каршеринга")
-                        .description("Бронируй машину и катайся где хочешь")
+                        .title("PoshStore")
+                        .description("Allow yourself the best")
                         .version("1.0")
-                        .contact(new Contact().name("Andrei Gavrilov")
-                                .email("my@email.com"))
                 );
     }
 }
