@@ -5,7 +5,7 @@ import com.project.headbridgeproject.poshStore.dto.UserDto;
 import com.project.headbridgeproject.poshStore.entity.UserEntity;
 import com.project.headbridgeproject.poshStore.exeption.NotFoundException;
 import com.project.headbridgeproject.poshStore.repository.UserRepository;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,12 +14,17 @@ import java.util.List;
 @Service
 public class UserService {
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+
+    /*private final BCryptPasswordEncoder bCryptPasswordEncoder;
     public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-    }
+    }*/
 
     @Transactional(readOnly = true)
     public List<UserDto> getAllUsers() {
@@ -38,8 +43,9 @@ public class UserService {
         userEntity.setFirstName(newUser.getFirstName());
         userEntity.setLastName(newUser.getLastName());
         userEntity.setEmail(newUser.getEmail());
-        bCryptPasswordEncoder.matches("pass", "db");
-        userEntity.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
+        //bCryptPasswordEncoder.matches("pass", "db");
+        //userEntity.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
+        userEntity.setPassword(newUser.getPassword());
         userEntity.setRole(newUser.getRole());
         userEntity.setPhoneNumber(newUser.getPhoneNumber());
 
